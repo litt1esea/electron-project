@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./script/dev/index.mjs"
+    "start": "node ./script/dev/index.mjs",
+    "release": "node ./script/release/index.mjs"
   },
   "keywords": [],
   "author": "",

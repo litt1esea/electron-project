@@ -4,9 +4,11 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { spawn } from 'child_process'
 import * as electron from 'electron'
+import os from 'os'
 
-// import { writeFileSync } from 'fs'
 
+import env from './env.mjs'
+import {readFileSync, writeFileSync } from 'fs'
 
 
 const dev = {
@@ -32,7 +34,7 @@ const dev = {
 
     async start() {
         await this.createServer()
-        console.log('server run at http://localhost:1600')
+        
 
         await this.buildMain()
         this.createElectronProcess()
@@ -41,11 +43,16 @@ const dev = {
 
      async buildMain() {
         let entryFilePath = path.join(process.cwd(), "src/main/app.ts")
+        // let preloadFilePath = path.join(process.cwd(), "src/preload/index.ts")
+        
         let outfile = path.join(process.cwd(), "release/bundled/entry.js")
+        // let outPreloadFile = path.join(process.cwd(), "release/bundled/preload/index.js")
         
         esbuild.buildSync({
           entryPoints: [entryFilePath],
-          outfile,
+          // outfile,
+          outfile: outfile, 
+          // outdir: path.join(process.cwd(), "release/bundled"),
           minify: false,
           bundle: true,
           platform: "node",
@@ -54,16 +61,32 @@ const dev = {
           external: ["electron"],
         })
 
-
-
-        // 写入环境变量
-        // let envScript = this.getEnvScript();
-        // let js = '${envScript}${os.EOL}${fs.readFileSync(outfile)}';
-        // fs.writeFileSync(outfile, js);
-        // writeFileSync()        
+        // 主进程写入环境变量
+        let envScript = this.getEnvScript()
+        // console.log('envScript', envScript)
+        let js = `${envScript}${os.EOL}${readFileSync(outfile)}`
+        writeFileSync(outfile, js)
+        
       },
 
 
+      getEnvScript() {
+        const new_env = {
+          ...env,
+          WEB_PORT: this.serverPort,
+          RES_DIR: path.join(process.cwd(), "resource/release")
+        }
+
+        let script = ''
+        for (const k of Object.keys(new_env)) {
+          script += `process.env.${k} = '${new_env[k]}';`
+        }
+        return script
+      },
+
+      /**
+       * 启动 electron
+       */
       createElectronProcess() {
         this.electronProcess = spawn(electron.default, ['release/bundled/entry.js'], {cwd: process.cwd()})
         this.electronProcess.on('close', ()=> {

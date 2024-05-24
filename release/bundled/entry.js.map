@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/main/app.ts"],
+  "sourcesContent": ["import { app, BrowserWindow } from \"electron\"\r\nconst log = (...args: string[]) => {\r\n    console.log(`[${(new Date).toLocaleString()}]`, ...args)\r\n}\r\n\r\nlog(\"electron start\")\r\n\r\nlet mainWindow;\r\napp.on(\"ready\", () => {\r\n  mainWindow = new BrowserWindow({\r\n    width: 800,\r\n    height: 600,\r\n  });\r\n  mainWindow.loadURL(\"http://localhost:1600/\");\r\n});\r\n\r\n\r\nlog('a')\r\n"],
+  "mappings": ";AAAA,SAAS,KAAK,qBAAqB;AACnC,IAAM,MAAM,IAAI,SAAmB;AAC/B,UAAQ,IAAI,KAAK,oBAAI,QAAM,eAAe,CAAC,KAAK,GAAG,IAAI;AAC3D;AAEA,IAAI,gBAAgB;AAEpB,IAAI;AACJ,IAAI,GAAG,SAAS,MAAM;AACpB,eAAa,IAAI,cAAc;AAAA,IAC7B,OAAO;AAAA,IACP,QAAQ;AAAA,EACV,CAAC;AACD,aAAW,QAAQ,wBAAwB;AAC7C,CAAC;AAGD,IAAI,GAAG;",
+  "names": []
+}

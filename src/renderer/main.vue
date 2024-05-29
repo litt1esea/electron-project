@@ -7,14 +7,16 @@
 
 
 
-
-
-
-
 <script setup lang="ts">
+import { alert } from './components/Alert';
 import Todo from './pages/Todo.vue'
 
-function exit() {
-    window.electronApi.exit()
+async function exit() {
+    const ok = await alert({
+        info:'确定要退出吗?'
+    })
+    if (ok) {
+        window.electronApi.exit()
+    }
 }
 </script>

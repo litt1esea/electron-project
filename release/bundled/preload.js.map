@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["../../src/preload/index.ts"],
   "sourcesContent": ["const  { contextBridge, ipcRenderer } = require(\"electron\")\r\n\r\ncontextBridge.exposeInMainWorld(\"electronApi\", {\r\n    exit: () => ipcRenderer.invoke(\"system:exit\")\r\n})"],
-  "mappings": ";;;AAAA,IAAO,EAAE,eAAe,YAAY,IAAI,QAAQ,UAAU;AAE1D,cAAc,kBAAkB,eAAe;AAAA,EAC3C,MAAM,MAAM,YAAY,OAAO,aAAa;AAChD,CAAC;",
+  "mappings": ";AAAA,IAAO,EAAE,eAAe,YAAY,IAAI,QAAQ,UAAU;AAE1D,cAAc,kBAAkB,eAAe;AAAA,EAC3C,MAAM,MAAM,YAAY,OAAO,aAAa;AAChD,CAAC;",
   "names": []
 }

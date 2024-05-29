@@ -1,6 +1,6 @@
 <template>
-    <Alarm></Alarm>
-    <button @click="exit">退出</button>
+    <Todo></Todo>
+    <button @click="exit" style="margin-top: 16px">退出</button>
 </template>
 
 
@@ -12,7 +12,7 @@
 
 
 <script setup lang="ts">
-import Alarm from './pages/Alarm.vue';
+import Todo from './pages/Todo.vue'
 
 function exit() {
     window.electronApi.exit()

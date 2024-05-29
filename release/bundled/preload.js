@@ -1,5 +1,3 @@
-"use strict";
-
 // src/preload/index.ts
 var { contextBridge, ipcRenderer } = require("electron");
 contextBridge.exposeInMainWorld("electronApi", {

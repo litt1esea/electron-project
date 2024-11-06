@@ -1,5 +1,5 @@
 <template>
-    <div class="alert-mask" v-if="config">
+    <div class="alert" v-if="config">
         <div class="alert-header">
             Alert
         </div>
@@ -10,6 +10,7 @@
             <button @click="okBtnClick">ok</button>
         </div>
     </div>
+    <div class="alert-mask"  v-if="config"></div>
 </template>
 
 
@@ -45,10 +46,10 @@ const cancelBtnClick = (btnName) => {
 </script>
 
 
-<style scoped>
+<style>
 
-.alert-mask {
-    position: absolute;
+.alert {
+    position: fixed;
     width: 200px;
     height: 200px;;
     background: rgba(0, 0, 0, 0.6);
@@ -58,5 +59,25 @@ const cancelBtnClick = (btnName) => {
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
+    z-index: 301;
+}
+.alert-mask {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 300;
+}
+
+.alert-header {
+    padding: 8px;
+}
+.alert-body {
+    flex: 1;
+    background: rgba(155, 155, 155, 1);
+    padding: 8px;
+}
+.alert-footer {
+    text-align: right;
+    padding: 8px;
 }
 </style>

@@ -8,7 +8,7 @@
 
 
 <script setup lang="ts">
-import { alert } from './components/Alert';
+import { alert } from './components/Alert'
 import Todo from './pages/Todo.vue'
 
 async function exit() {
@@ -16,7 +16,7 @@ async function exit() {
         info:'确定要退出吗?'
     })
     if (ok) {
-        window.electronApi.exit()
+        window.electronApi.exit()        
     }
 }
 </script>
